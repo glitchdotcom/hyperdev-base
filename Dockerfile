@@ -16,7 +16,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     jq \
     libbison-dev \
     libbz2-dev \
-    libc-dev \
+    libc6-dev \
     libcairo2-dev \
     libcurl4-openssl-dev \
     libdjvulibre-dev \
@@ -48,10 +48,11 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     libreadline-dev \
     librsvg2-dev \
     librtmp-dev \
-    libsqlite-dev \
+    libsqlite0-dev \
+    libsqlite3-dev \
     libssl-dev \
     libtcl8.6 \
-    libtiff-dev \
+    libtiff5-dev \
     libtk8.6 \
     libtool-bin \
     libxml2-dev \
@@ -70,10 +71,16 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     rm -rf /var/cache/apt/archives/* \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 
+# add user for running your apps
+RUN adduser -q --shell /bin/bash app --quiet --disabled-password --disabled-login --gecos ""
+
 # install dumb-init to manage signal forwarding from the run scripts to the processes they call
 RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64.deb && \
   dpkg -i dumb-init_*.deb && \
   rm dumb-init_*.deb
+
+# the rest happens as the app user
+USER app
 
 # install nvm and node versions
 COPY install-node.sh /usr/bin/install-node
