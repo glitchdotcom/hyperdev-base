@@ -3,7 +3,7 @@ require "docker-api"
 
 describe "Dockerfile" do
 
-  image = ::Docker::Image.build_from_dir( '.', 't' => 'hyperdev-base:latest') do |v|
+  image = ::Docker::Image.build_from_dir( '.', 't' => 'fogcreek/hyperdev-base:latest') do |v|
     if (log = JSON.parse(v)) && log.has_key?("stream")
       $stdout.puts log["stream"]
     end
