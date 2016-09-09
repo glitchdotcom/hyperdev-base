@@ -1,5 +1,8 @@
 FROM ubuntu:xenial
 
+ENV DPKG_FRONTEND noninteractive
+ENV TERM xterm
+
 # upgrade packages, install deps
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     autoconf \
