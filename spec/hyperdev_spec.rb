@@ -96,11 +96,11 @@ describe "Dockerfile" do
 
 
   it "Installs required node.js versions and NVM" do
-    expect(file("/home/app/.nvm/nvm.sh")).to exist
-    expect(file("/home/app/.nvm/bin/node-v4.5.0-linux-x64")).to exist
-    expect(file("/home/app/.nvm/bin/node-v5.12.0-linux-x64")).to exist
-    expect(file("/home/app/.nvm/bin/node-v6.5.0-linux-x64")).to exist
-    expect(file("/home/app/.nvm/bin/node-v0.12.15-linux-x64")).to exist
+    expect(file("/home/nvm/.nvm/nvm.sh")).to exist
+    expect(file("/home/nvm/.nvm/bin/node-v4.5.0-linux-x64")).to exist
+    expect(file("/home/nvm/.nvm/bin/node-v5.12.0-linux-x64")).to exist
+    expect(file("/home/nvm/.nvm/bin/node-v6.9.1-linux-x64")).to exist
+    expect(file("/home/nvm/.nvm/bin/node-v0.12.15-linux-x64")).to exist
   end
 
 end

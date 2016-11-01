@@ -11,11 +11,15 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     bison \
     bzip2 \
     curl \
+    elixir \
+    erlang \
     flex bison \
     g++ \
     gcc \
     git \
     golang \
+    haskell-platform \
+    htop \
     jq \
     libbison-dev \
     libbz2-dev \
@@ -61,30 +65,44 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     libxml2-dev \
     libzmq3-dev \
     linux-libc-dev \
+    lua5.2 \
     make \
     nano \
+    ocaml \
+    openjdk-8-jdk \
     patch \
+    php \
     pkg-config \
     python \
     python-pip \
+    ruby \
+    ruby-dev \
     runit \
+    rustc \
+    rust-gdb \
+    rust-lldb \
     wget \
     zlib1g-dev \
     && apt-get -y autoremove && apt-get clean autoclean && \
     rm -rf /var/cache/apt/archives/* \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 
-# add user for running your apps
-RUN adduser -q --shell /bin/bash app --quiet --disabled-password --disabled-login --gecos ""
-
 # install dumb-init to manage signal forwarding from the run scripts to the processes they call
 RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64.deb && \
   dpkg -i dumb-init_*.deb && \
   rm dumb-init_*.deb
 
-# the rest happens as the app user
-USER app
+# Add nvm to all login shells
+RUN echo 'export NVM_DIR="/home/nvm/.nvm"' > /etc/profile.d/nvm.sh
+RUN echo 'source ${NVM_DIR}/nvm.sh' >> /etc/profile.d/nvm.sh
+
+# add user for running your apps
+RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --no-create-home --home /app app
 
 # install nvm and node versions
+RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --home /home/nvm nvm
+USER nvm
 COPY install-node.sh /usr/bin/install-node
 RUN install-node
+
+USER root
