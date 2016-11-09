@@ -45,6 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   docker-api
+  rspec
   serverspec
 
 BUNDLED WITH

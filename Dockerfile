@@ -82,6 +82,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     rustc \
     rust-gdb \
     rust-lldb \
+    vim \
     wget \
     zlib1g-dev \
     && apt-get -y autoremove && apt-get clean autoclean && \

@@ -87,6 +87,7 @@ describe "Dockerfile" do
       python
       python-pip
       runit
+      vim
       wget
       zlib1g-dev
     ].each do |package_name|
