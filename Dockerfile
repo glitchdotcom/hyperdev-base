@@ -12,6 +12,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     bzip2 \
     curl \
     elixir \
+    emacs \
     erlang \
     flex bison \
     g++ \
