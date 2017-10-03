@@ -9,14 +9,20 @@ ENV LANGUAGE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
+RUN apt-get -y update && apt-get -y install \
+    apt-utils \
+    locales \
+    wget \
+    && apt-get -y autoremove && apt-get clean autoclean && \
+    rm -rf /var/cache/apt/archives/* && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
+
 RUN locale-gen en_US.UTF-8 && \
     update-locale LANG=en_US.UTF-8 && \
     echo LANG=en_US.UTF-8      > /etc/default/locale && \
     echo LC_MESSAGES=POSIX    >> /etc/default/locale && \
     echo LC_ALL=en_US.UTF-8   >> /etc/environment && \
     echo LANGUAGE=en_US.UTF-8 >> /etc/environment
-
-RUN apt-get -y update && apt-get -y install wget apt-utils
 
 # Erlang and elixir repositories
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
@@ -151,7 +157,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     wget \
     zlib1g-dev \
     && apt-get -y autoremove && apt-get clean autoclean && \
-    rm -rf /var/cache/apt/archives/* \
+    rm -rf /var/cache/apt/archives/* && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-3.6 100 && \
