@@ -23,6 +23,11 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     rm erlang-solutions_1.0_all.deb
 
+# APL
+RUN wget ftp://ftp.gnu.org/gnu/apl/apl_1.6-1_amd64.deb 2>&1 && \
+    dpkg -i apl_1.6-1_amd64.deb 2>&1 && \
+    rm apl_1.6-1_amd64.deb
+
 # .NET Core
 RUN echo "deb [arch=amd64] http://apt-mo.trafficmanager.net/repos/dotnet-release/ xenial main" > /etc/apt/sources.list.d/dotnetdev.list && \
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
@@ -51,12 +56,15 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     emacs \
     elixir \
     esl-erlang \
+    ffmpeg \
     flex bison \
     g++ \
     gcc \
     git \
     haskell-platform \
     htop \
+    imagemagick \
+    libmagick++-dev \
     inetutils-ping \
     jq \
     libapache2-mod-php \
@@ -136,6 +144,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     ruby \
     ruby-dev \
     runit \
+    sqlite \
     subversion \
     telnet \
     vim \
@@ -213,3 +222,8 @@ RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gec
 
 # add user to install nvm
 RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --home /home/nvm nvm
+
+COPY install-node.sh /usr/bin/install-node
+USER nvm
+RUN install-node
+USER root
