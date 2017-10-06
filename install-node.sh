@@ -34,3 +34,5 @@ for version in ${VERSIONS}; do
   fi
 done
 wait
+
+nvm cache clear
