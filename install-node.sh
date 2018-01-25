@@ -17,7 +17,6 @@ install_version() {
   local dest_dir=${base_dir}/v${version}
   # redirect stderr to /dev/null to not show progress bar
   nvm install ${version} 2> /dev/null
-  npm install -g pnpm@1.31.0
 }
 
 for version in ${VERSIONS}; do
