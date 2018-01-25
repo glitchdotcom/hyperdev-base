@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PARALLELISM=10
+
 curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash 2>&1
 export NVM_DIR="/home/nvm/.nvm"
 source ${NVM_DIR}/nvm.sh
@@ -19,8 +21,15 @@ install_version() {
   nvm install ${version} 2> /dev/null
 }
 
-for version in ${VERSIONS}; do
-  install_version ${version}
+parallel=0
+for version in ${VERSIONS_TO_INSTALL}; do
+  install_version ${version} &
+  parallel=$(($parallel + 1))
+  if [ ${parallel} -eq ${PARALLELISM} ]; then
+    wait
+    parallel=0
+  fi
 done
+wait
 
 nvm cache clear
