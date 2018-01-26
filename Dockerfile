@@ -230,6 +230,7 @@ RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gec
 RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --home /home/nvm nvm
 
 COPY install-node.sh /tmp/install-node.sh
+RUN chown nvm /usr/bin
 USER nvm
 RUN /tmp/install-node.sh
 USER root

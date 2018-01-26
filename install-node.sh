@@ -34,4 +34,4 @@ nvm cache clear
 nvm use 6
 
 curl -L https://unpkg.com/@pnpm/self-installer | \
-PNPM_VERSION=1.31.1 PNPM_DEST=/opt/pnpm/lib/node_modules/pnpm PNPM_BIN_DEST=/usr/bin node
+PNPM_VERSION=1.31.1 PNPM_DEST=/home/nvm/pnpm/lib/node_modules/pnpm PNPM_BIN_DEST=/usr/bin node
