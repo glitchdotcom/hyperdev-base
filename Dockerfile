@@ -220,11 +220,16 @@ RUN curl -LsS https://symfony.com/installer -o /usr/bin/symfony && chmod a+x /us
 RUN gem install rails
 
 # Add nvm to all login shells
-RUN echo 'export NVM_DIR="/opt/nvm"' > /etc/profile.d/nvm.sh
+RUN echo 'export NVM_DIR="/home/nvm/.nvm"' > /etc/profile.d/nvm.sh
 RUN echo 'source ${NVM_DIR}/nvm.sh' >> /etc/profile.d/nvm.sh
 
 # add user for running your apps
 RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --no-create-home --home /app app
 
+# add user to install nvm
+RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --home /home/nvm nvm
+
 COPY install-node.sh /tmp/install-node.sh
+USER nvm
 RUN /tmp/install-node.sh
+USER root

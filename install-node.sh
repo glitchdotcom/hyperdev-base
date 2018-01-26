@@ -2,8 +2,8 @@
 
 PARALLELISM=10
 
-export NVM_DIR="/opt/nvm"
 curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash 2>&1
+export NVM_DIR="/home/nvm/.nvm"
 source ${NVM_DIR}/nvm.sh
 
 read -r -d '' VERSIONS << EOM
