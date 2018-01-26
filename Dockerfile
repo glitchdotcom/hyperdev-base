@@ -226,10 +226,5 @@ RUN echo 'source ${NVM_DIR}/nvm.sh' >> /etc/profile.d/nvm.sh
 # add user for running your apps
 RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --no-create-home --home /app app
 
-# add user to install nvm
-RUN adduser --quiet --shell /bin/bash --disabled-password --disabled-login --gecos "" --home /home/nvm nvm
-
-COPY install-node.sh /usr/bin/install-node
-USER nvm
-RUN install-node
-USER root
+COPY install-node.sh /tmp/install-node.sh
+RUN /tmp/install-node.sh
