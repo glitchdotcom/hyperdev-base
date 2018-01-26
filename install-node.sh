@@ -12,11 +12,8 @@ read -r -d '' VERSIONS << EOM
 6.12.3 6.11.5 6.10.3 6.9.5 6.8.1 6.7.0 6.6.0 6.5.0 6.4.0 6.3.1 6.2.2 6.1.0 6.0.0
 EOM
 
-base_dir=/home/nvm/.nvm/versions/node
-
 install_version() {
   local version=$1
-  local dest_dir=${base_dir}/v${version}
   # redirect stderr to /dev/null to not show progress bar
   nvm install ${version} 2> /dev/null
 }
