@@ -22,7 +22,7 @@ install_version() {
 }
 
 parallel=0
-for version in ${VERSIONS_TO_INSTALL}; do
+for version in ${VERSIONS}; do
   install_version ${version} &
   parallel=$(($parallel + 1))
   if [ ${parallel} -eq ${PARALLELISM} ]; then
