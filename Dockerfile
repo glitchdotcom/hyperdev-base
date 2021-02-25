@@ -55,6 +55,7 @@ RUN apt-get -y update && apt-get -y upgrade && apt-get -y install \
     build-essential \
     bzip2 \
     clang-3.6 \
+    cmake \
     composer \
     curl \
     dos2unix \
